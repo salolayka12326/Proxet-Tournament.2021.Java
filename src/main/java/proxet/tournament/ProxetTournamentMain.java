@@ -21,7 +21,7 @@ public class ProxetTournamentMain {
         System.out.printf("Team '%s'%n", name);
 
         if (players != null) {
-            players.forEach(System.out::println);
+            players.forEach(player->System.out.println(player.getNickname()+"   "+player.getVehicleType()));
         }
     }
 }

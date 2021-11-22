@@ -4,6 +4,7 @@ import proxet.tournament.generator.dto.Player;
 import proxet.tournament.generator.dto.TeamGeneratorResult;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,19 +19,16 @@ public class TeamGenerator {
         for (int i = 0; i < 18; i++) {
             res.add(new Player("1", 1));
         }
-        int count = 0;
         int[] max1 = new int[]{0, 0, 0, 0, 0, 0};
         int[] max2 = new int[]{0, 0, 0, 0, 0, 0};
         int[] max3 = new int[]{0, 0, 0, 0, 0, 0};
         int[] minPos = new int[]{0, 0, 0};
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            while (reader.readLine() != null) {
-                count++;
-            }
-            BufferedReader reader1 = new BufferedReader(new FileReader(filePath));
-            for (int i = 0; i < count; i++) {
-                String[] str = reader1.readLine().split("\\s");
+            String line = reader.readLine();
+            String[] str=line.split("\\s");
+            while (line != null) {
+
                 switch (str[2]) {
                     case "1": {
                         int current = Integer.parseInt(str[1]);
@@ -79,23 +77,25 @@ public class TeamGenerator {
                     break;
 
                 }
-
-            }
-            for (int i = 0; i < 18; ) {
-                firstTeam.add(res.get(i));
-                i++;
-                secondTeam.add(res.get(i));
-                i++;
+                // считываем остальные строки в цикле
+                line = reader.readLine();
+                if(line!=null)str=line.split("\\s");
             }
 
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
         }
+
+        for (int i = 0; i < 18; ) {
+            firstTeam.add(res.get(i));
+            i++;
+            secondTeam.add(res.get(i));
+            i++;
+        }
+
         return new TeamGeneratorResult(
                 firstTeam, secondTeam
         );
     }
-
 
 }
