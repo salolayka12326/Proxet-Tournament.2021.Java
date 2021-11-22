@@ -4,7 +4,6 @@ import proxet.tournament.generator.dto.Player;
 import proxet.tournament.generator.dto.TeamGeneratorResult;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
