@@ -77,7 +77,6 @@ public class TeamGenerator {
                     break;
 
                 }
-                // считываем остальные строки в цикле
                 line = reader.readLine();
                 if(line!=null)str=line.split("\\s");
             }
